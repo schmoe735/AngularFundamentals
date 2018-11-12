@@ -14,6 +14,8 @@ import { allSettled } from 'q';
 export class EventDetailsComponent implements OnInit {
   addMode: boolean;
   event: IEvent;
+  filterBy = 'all';
+  sortBy = 'name';
   constructor(private _eventService: EventService, private _route: ActivatedRoute) { }
 
   ngOnInit() {
