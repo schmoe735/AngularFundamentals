@@ -17,10 +17,18 @@ import {
   EventListResolverService,
   EventRouterActivator
 } from './events/index';
+import { AuthService } from './user/auth.service';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { CreateSessionComponent } from './events/create-session/create-session.component';
+import { SessionListComponent } from './events/session-list/session-list.component';
+import { CollapsibleWellComponent } from './common/collapsible-well/collapsible-well.component';
+import { DurationPipe } from './events/shared/duration.pipe';
 
 @NgModule({
   imports: [
     BrowserModule,
+    FormsModule,
+    ReactiveFormsModule,
     RouterModule.forRoot(appRoutes)
   ],
   declarations: [
@@ -30,13 +38,18 @@ import {
     NavBarComponent,
     EventDetailsComponent,
     CreateEventComponent,
-    NotFoundComponent
+    NotFoundComponent,
+    CreateSessionComponent,
+    SessionListComponent,
+    CollapsibleWellComponent,
+    DurationPipe
   ],
   providers: [
     EventService,
     ToastrService,
     EventRouterActivator,
     EventListResolverService,
+    AuthService,
     {
       provide: 'canDeactivateCreateEvent', useValue: checkDirtyState
     }
