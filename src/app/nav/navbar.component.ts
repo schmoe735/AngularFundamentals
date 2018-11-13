@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { AuthService } from '../user/auth.service';
+import { ISession, EventService } from '../events';
 
 @Component({
   selector: 'nav-bar',
@@ -13,7 +14,15 @@ import { AuthService } from '../user/auth.service';
   ]
 })
 export class NavBarComponent {
-  constructor(public _authService: AuthService) {
+  searchTerm = '';
+  foundSessions: ISession[];
 
+  constructor(public _authService: AuthService, public _eventService: EventService) {}
+
+  searchSessions(searchTerm) {
+    this._eventService.searchSessions(searchTerm)
+                  .subscribe(sessions => {
+                    this.foundSessions = sessions;
+                  });
   }
 }

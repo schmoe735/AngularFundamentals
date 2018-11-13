@@ -3,10 +3,17 @@ import { NgModule } from '@angular/core';
 
 import { EventAppComponent } from './event-app.component';
 import { NavBarComponent } from './nav/navbar.component';
-import { ToastrService } from './common/toastr.service';
 import { appRoutes } from './routes';
 import { RouterModule } from '@angular/router';
 import { NotFoundComponent } from './errors/notfound/notfound.component';
+import {
+  TOASTR_TOKEN,
+  JQ_TOKEN,
+  Toastr,
+  CollapsibleWellComponent,
+  SimpleModalComponent,
+  ModalTriggerDirective
+} from './common/index';
 
 import {
   EventsListComponent,
@@ -15,14 +22,16 @@ import {
   EventDetailsComponent,
   CreateEventComponent,
   EventListResolverService,
-  EventRouterActivator
+  EventRouterActivator,
+  DurationPipe,
+  SessionListComponent,
+  CreateSessionComponent
 } from './events/index';
 import { AuthService } from './user/auth.service';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { CreateSessionComponent } from './events/create-session/create-session.component';
-import { SessionListComponent } from './events/session-list/session-list.component';
-import { CollapsibleWellComponent } from './common/collapsible-well/collapsible-well.component';
-import { DurationPipe } from './events/shared/duration.pipe';
+
+const jQuery = window['$'];
+declare let toastr: Toastr;
 
 @NgModule({
   imports: [
@@ -42,17 +51,18 @@ import { DurationPipe } from './events/shared/duration.pipe';
     CreateSessionComponent,
     SessionListComponent,
     CollapsibleWellComponent,
-    DurationPipe
+    DurationPipe,
+    SimpleModalComponent,
+    ModalTriggerDirective
   ],
   providers: [
     EventService,
-    ToastrService,
     EventRouterActivator,
     EventListResolverService,
     AuthService,
-    {
-      provide: 'canDeactivateCreateEvent', useValue: checkDirtyState
-    }
+    {provide: TOASTR_TOKEN, useValue: toastr},
+    {provide: JQ_TOKEN, useValue: jQuery},
+    {provide: 'canDeactivateCreateEvent', useValue: checkDirtyState}
   ],
   bootstrap: [EventAppComponent]
 })
