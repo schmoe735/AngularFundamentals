@@ -6,6 +6,7 @@ import { NavBarComponent } from './nav/navbar.component';
 import { appRoutes } from './routes';
 import { RouterModule } from '@angular/router';
 import { NotFoundComponent } from './errors/notfound/notfound.component';
+
 import {
   TOASTR_TOKEN,
   JQ_TOKEN,
@@ -25,10 +26,13 @@ import {
   EventRouterActivator,
   DurationPipe,
   SessionListComponent,
-  CreateSessionComponent
+  CreateSessionComponent,
+  UpvoteComponent,
+  VotersService
 } from './events/index';
 import { AuthService } from './user/auth.service';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+
 
 const jQuery = window['$'];
 declare let toastr: Toastr;
@@ -53,13 +57,15 @@ declare let toastr: Toastr;
     CollapsibleWellComponent,
     DurationPipe,
     SimpleModalComponent,
-    ModalTriggerDirective
+    ModalTriggerDirective,
+    UpvoteComponent
   ],
   providers: [
     EventService,
     EventRouterActivator,
     EventListResolverService,
     AuthService,
+    VotersService,
     {provide: TOASTR_TOKEN, useValue: toastr},
     {provide: JQ_TOKEN, useValue: jQuery},
     {provide: 'canDeactivateCreateEvent', useValue: checkDirtyState}
