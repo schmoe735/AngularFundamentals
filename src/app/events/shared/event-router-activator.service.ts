@@ -8,7 +8,6 @@ export class EventRouterActivator implements CanActivate {
   constructor(private _eventService: EventService, private _router: Router) { }
 
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean {
-    console.log(state);
     const exists = !!this._eventService.getEvent(+route.params['id']);
 
     if (!exists) {
