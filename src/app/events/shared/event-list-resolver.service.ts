@@ -10,6 +10,6 @@ export class EventListResolverService {
   constructor(private eventService: EventService) { }
 
   resolve() {
-    return this.eventService.getEvents().pipe(map(events => events));
+    return this.eventService.getEvents();
   }
 }

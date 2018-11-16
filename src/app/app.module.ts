@@ -6,6 +6,7 @@ import { NavBarComponent } from './nav/navbar.component';
 import { appRoutes } from './routes';
 import { RouterModule } from '@angular/router';
 import { NotFoundComponent } from './errors/notfound/notfound.component';
+import { HttpClientModule } from '@angular/common/http';
 
 import {
   TOASTR_TOKEN,
@@ -29,7 +30,8 @@ import {
   CreateSessionComponent,
   UpvoteComponent,
   VotersService,
-  LocationValidatorDirective
+  LocationValidatorDirective,
+  EventResolverService
 } from './events/index';
 import { AuthService } from './user/auth.service';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -43,7 +45,8 @@ declare let toastr: Toastr;
     BrowserModule,
     FormsModule,
     ReactiveFormsModule,
-    RouterModule.forRoot(appRoutes)
+    RouterModule.forRoot(appRoutes),
+    HttpClientModule
   ],
   declarations: [
     EventAppComponent,
@@ -68,6 +71,7 @@ declare let toastr: Toastr;
     EventListResolverService,
     AuthService,
     VotersService,
+    EventResolverService,
     {provide: TOASTR_TOKEN, useValue: toastr},
     {provide: JQ_TOKEN, useValue: jQuery},
     {provide: 'canDeactivateCreateEvent', useValue: checkDirtyState}

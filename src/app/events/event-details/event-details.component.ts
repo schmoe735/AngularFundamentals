@@ -19,11 +19,18 @@ export class EventDetailsComponent implements OnInit {
   constructor(private _eventService: EventService, private _route: ActivatedRoute) { }
 
   ngOnInit() {
-    this._route.params.forEach((params: Params) => {
-      this.event = this._eventService.getEvent(+params['id']);
-      this.addMode = false;
-    });
+    // this._route.params.forEach((params: Params) => {
+      // this._eventService.getEvent(+params['id']).subscribe((val: IEvent) => {
+      //     this.event = val;
+      //     this.addMode = false;
+      // });
+      // this.event = this._route.snapshot.data['event'];
+    // });
     // this.event = this._eventService.getEvent(+this._route.snapshot.params['id']);
+
+    this._route.data.forEach((data) => {
+      this.event = data['event'];
+    });
   }
 
   addSession() {
@@ -33,7 +40,8 @@ export class EventDetailsComponent implements OnInit {
     const nextId = Math.max.apply(null, this.event.sessions.map(s => s.id));
     session.id = nextId + 1;
     this.event.sessions.push(session);
-    this._eventService.updateEvent(this.event);
+    // this._eventService.updateEvent(this.event);
+    this._eventService.saveEvent(this.event).subscribe();
     this.addMode = false;
   }
   cancelAddSession() {
