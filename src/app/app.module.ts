@@ -28,7 +28,8 @@ import {
   SessionListComponent,
   CreateSessionComponent,
   UpvoteComponent,
-  VotersService
+  VotersService,
+  LocationValidatorDirective
 } from './events/index';
 import { AuthService } from './user/auth.service';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -58,7 +59,8 @@ declare let toastr: Toastr;
     DurationPipe,
     SimpleModalComponent,
     ModalTriggerDirective,
-    UpvoteComponent
+    UpvoteComponent,
+    LocationValidatorDirective
   ],
   providers: [
     EventService,

@@ -8,7 +8,7 @@ import { EventService, IEvent } from '../shared';
   styleUrls: ['./create-event.component.css']
 })
 export class CreateEventComponent implements OnInit {
-
+  // newEvent: IEvent;
   isDirty = true;
   constructor(private _router: Router, private _eventService: EventService) { }
 
@@ -25,7 +25,8 @@ export class CreateEventComponent implements OnInit {
     //     country: 'Australia'
     //   },
     //   onlineUrl: 'http://www.google.com',
-    //   imageUrl: 'https://www.google.com.au/images/branding/googlelogo/1x/googlelogo_color_272x92dp.png'
+    //   imageUrl: 'https://www.google.com.au/images/branding/googlelogo/1x/googlelogo_color_272x92dp.png',
+    //   sessions: []
     // };
   }
   cancel() {
