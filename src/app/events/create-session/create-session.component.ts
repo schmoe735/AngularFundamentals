@@ -1,4 +1,4 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, ElementRef, ViewChild, AfterViewInit } from '@angular/core';
 import { FormControl, Validators, FormGroup } from '@angular/forms';
 import { ISession } from '../shared';
 
@@ -14,7 +14,7 @@ import { ISession } from '../shared';
     .error :ms-input-placeholder { color: #999; }
   `]
 })
-export class CreateSessionComponent implements OnInit {
+export class CreateSessionComponent implements OnInit, AfterViewInit {
   newSessionForm: FormGroup;
   name: FormControl;
   level: FormControl;
@@ -23,6 +23,8 @@ export class CreateSessionComponent implements OnInit {
   abstract: FormControl;
   @Output() saveNewSession = new EventEmitter();
   @Output() cancelAddSession = new EventEmitter();
+  @ViewChild('inputSessionName') inputSessionName: ElementRef;
+
   constructor() { }
 
   ngOnInit() {
@@ -41,6 +43,10 @@ export class CreateSessionComponent implements OnInit {
     });
   }
 
+  ngAfterViewInit() {
+    console.log(this.inputSessionName);
+    this.inputSessionName.nativeElement.focus();
+  }
   private restrictedWords(words) {
     return (control: FormControl): {[key: string]: any} => {
       if (!words) {
